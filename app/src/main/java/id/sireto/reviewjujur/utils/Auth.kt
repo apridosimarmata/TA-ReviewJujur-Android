@@ -22,29 +22,19 @@ object Auth {
     private var response = BaseResponse()
 
     fun saveTokenDetails(context: Context, token : String, refreshToken : String){
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        with(sharedPreferences.edit()){
-            putString("token", token)
-            putString("refresh_token", refreshToken)
-                .commit()
-        }
-    }
-
-    fun getToken(context : Context) : String? {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreferences.getString("token", null)
-    }
-
-    fun getRefreshToken(context: Context) : String? {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPreferences.getString("refresh_token", null)
+        SharedPref.saveToSharedPref(context, Constants.KEY_TOKEN, token)
+        SharedPref.saveToSharedPref(context, Constants.KEY_REFRESH_TOKEN, refreshToken)
     }
 
     suspend fun authUser(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit) {
+
+        val token = SharedPref.getFromSharedPref(context, Constants.KEY_TOKEN)
+        val refreshToken = SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
+
         lifecycleCoroutineScope.launch(Dispatchers.IO){
             val auth = lifecycleCoroutineScope.async {
                 response = try {
-                    apiService.authorizeUser(getToken(context)!!, getRefreshToken(context)!!).body()!!
+                    apiService.authorizeUser(token!!, refreshToken!!).body()!!
                 }catch (e : Exception) {
                     BaseResponse(Meta(code = 0, message = "Error : ${e.cause}"), null)
                 }
@@ -60,11 +50,14 @@ object Auth {
         }
     }
 
-    suspend fun refreshUserToken(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit){
+    private suspend fun refreshUserToken(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit){
+
+        val refreshToken = SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
+
         lifecycleCoroutineScope.launch(Dispatchers.IO){
             val refresh = lifecycleCoroutineScope.async {
                 response = try {
-                    apiService.refreshUserToken(getRefreshToken(context)!!).body()!!
+                    apiService.refreshUserToken(refreshToken!!).body()!!
                 }catch (e : Exception){
                     BaseResponse(Meta(code = 0, message = "Error : ${e.cause}"), null)
                 }

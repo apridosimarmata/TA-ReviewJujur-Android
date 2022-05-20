@@ -86,24 +86,16 @@ class LoginActivity : AppCompatActivity() {
             login.await()
             progress.dismiss()
 
-            when(response.meta.code){
-                200 -> {
-                    response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
-                    var authenticationResponse = Converter.anyToAthenticationResponse(response.result as LinkedTreeMap<String, Any>)
-                    Auth.saveTokenDetails(this@LoginActivity, authenticationResponse.token, authenticationResponse.refreshToken)
-                    this@LoginActivity.finish()
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-                }
-                in 400 .. 450 -> response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
-                in 500 .. 550 -> {
-                    if(response.meta.message!=null){
-                        UI.snackbarTop(binding.loginEmail, response.meta.message!!)
-                    }else{
-                        UI.snackbarTop(binding.loginEmail, Constants.SERVER_ERROR)
-                    }
-                }
-                else -> UI.snackbarTop(binding.loginEmail, Constants.UNKNOWN_ERROR)
+            if (response.meta.code == 200){
+                response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
+                var authenticationResponse = Converter.anyToAthenticationResponse(response.result as LinkedTreeMap<String, Any>)
+                Auth.saveTokenDetails(this@LoginActivity, authenticationResponse.token, authenticationResponse.refreshToken)
+                this@LoginActivity.finish()
+                startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+            }else{
+                UI.showSnackbarByResponseCode(response.meta, binding.loginEmail)
             }
+
         }
     }
 

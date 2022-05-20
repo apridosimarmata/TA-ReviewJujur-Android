@@ -4,12 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.sireto.reviewjujur.databinding.RestoMainCardBinding
+import id.sireto.reviewjujur.models.BusinessResponse
 
 class RestoMainCardAdapter() : RecyclerView.Adapter<RestoMainCardAdapter.RestoMainCardViewHolder>() {
 
-    inner class RestoMainCardViewHolder(private val binding : RestoMainCardBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(){
+    var businesses = arrayListOf<BusinessResponse>()
 
+    inner class RestoMainCardViewHolder(private val binding : RestoMainCardBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(business : BusinessResponse){
+            binding.restoMaiNRestoName.text = business.name
+            binding.restoMainAddress.text = business.address
         }
     }
 
@@ -17,10 +21,8 @@ class RestoMainCardAdapter() : RecyclerView.Adapter<RestoMainCardAdapter.RestoMa
         RestoMainCardViewHolder(RestoMainCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RestoMainCardViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(businesses[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = businesses.size
 }

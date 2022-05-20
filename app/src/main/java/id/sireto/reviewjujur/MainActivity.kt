@@ -3,11 +3,14 @@ package id.sireto.reviewjujur
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import id.sireto.reviewjujur.authentication.LoginActivity
 import id.sireto.reviewjujur.main.HomeActivity
 import id.sireto.reviewjujur.utils.Auth
+import id.sireto.reviewjujur.utils.Constants
+import id.sireto.reviewjujur.utils.SharedPref
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -18,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(Auth.getToken(this) != null){
+        SharedPref.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if(SharedPref.getFromSharedPref(this, Constants.KEY_TOKEN) != null){
             authUser()
         }else{
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))

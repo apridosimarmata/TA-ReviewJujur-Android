@@ -58,7 +58,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/home_choose_location_btn"
                 android:layout_width="40dp"
                 android:layout_height="0dp"
                 android:clickable="true"
@@ -87,13 +87,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_locationNotChoosen"
                 android:layout_width="250dp"
                 android:layout_height="300dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="150dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/home_choose_location_btn"
                 app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/textView21"
@@ -129,6 +131,113 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView21"
                     app:layout_constraintVertical_bias="1.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/home_locationName"
+                style="@style/heading.big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Parapat,"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/home_provinceName"
+                style="@style/heading.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sumatera Utara"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_locationName"
+                app:layout_constraintTop_toBottomOf="@+id/home_locationName"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/home_mostReview"
+                style="@style/heading.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Review Terbanyak"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_provinceName"
+                app:layout_constraintTop_toBottomOf="@+id/home_provinceName"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mostReview"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_mostReview"
+                app:layout_constraintVertical_bias="0.0"
+                tools:listitem="@layout/resto_main_card" />
+
+            <TextView
+                android:id="@+id/home_bestScore"
+                style="@style/heading.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Nilai Terbaik"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_mostReview"
+                app:layout_constraintTop_toBottomOf="@+id/rv_mostReview"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bestScore"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_bestScore"
+                app:layout_constraintVertical_bias="0.0"
+                tools:listitem="@layout/resto_main_card" />
+
+            <TextView
+                android:id="@+id/home_reviewed"
+                style="@style/heading.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Pernah Direview"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_bestScore"
+                app:layout_constraintTop_toBottomOf="@id/rv_bestScore"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reviewed"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_reviewed"
+                tools:listitem="@layout/resto_main_card" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -7,13 +7,17 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.databinding.ActivityRegistrationBinding
+import id.sireto.reviewjujur.main.HomeActivity
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
 import id.sireto.reviewjujur.models.UserPost
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
+import id.sireto.reviewjujur.utils.Auth
 import id.sireto.reviewjujur.utils.Constants
+import id.sireto.reviewjujur.utils.Converter
 import id.sireto.reviewjujur.utils.UI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -74,25 +78,18 @@ class RegistrationActivity : AppCompatActivity() {
             }
 
             register.await()
-            when(response.meta.code){
-                200 -> {
-                    response.meta.message?.let { UI.snackbar(binding.registrationName, it) }
-                    val intent = Intent(this@RegistrationActivity, CodeVerificationActivity::class.java)
-                    intent.putExtra("whatsappNo", binding.registrationWhatsappNumber.text.toString())
-                    intent.putExtra("type", Constants.VERIFY_ACCOUNT)
-                    startActivity(intent)
-                }
-                in 400 .. 450 -> response.meta.message?.let { UI.snackbar(binding.registrationName, it) }
-                in 500 .. 550 -> {
-                    if(response.meta.message!=null){
-                        UI.snackbarTop(binding.registrationName, response.meta.message!!)
-                    }else{
-                        UI.snackbarTop(binding.registrationName, Constants.SERVER_ERROR)
-                    }
-                }
-                else -> UI.snackbarTop(binding.registrationName, Constants.UNKNOWN_ERROR)
-            }
             progress.dismiss()
+
+            if (response.meta.code == 200){
+                response.meta.message?.let { UI.snackbar(binding.registrationName, it) }
+                val intent = Intent(this@RegistrationActivity, CodeVerificationActivity::class.java)
+                intent.putExtra("whatsappNo", binding.registrationWhatsappNumber.text.toString())
+                intent.putExtra("type", Constants.VERIFY_ACCOUNT)
+                startActivity(intent)
+            }else{
+                UI.showSnackbarByResponseCode(response.meta, binding.registrationName)
+            }
+
         }
 
     }

@@ -8,12 +8,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.databinding.ActivityForgotPasswordBinding
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
 import id.sireto.reviewjujur.utils.Constants
+import id.sireto.reviewjujur.utils.Converter
 import id.sireto.reviewjujur.utils.UI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -90,17 +92,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
             sendCode.await()
             progress.dismiss()
 
-            when(response.meta.code){
-                200 -> startActivity(Intent(this@ForgotPasswordActivity, CodeVerificationActivity::class.java).putExtra("whatsappNo", binding.forgotWhatsappNo.text.toString()))
-                in 400 .. 450 -> response.meta.message?.let { UI.snackbar(binding.forgotWhatsappNo, it) }
-                in 500 .. 510 -> {
-                    if(response.meta.message!=null){
-                        UI.snackbarTop(binding.forgotWhatsappNo, response.meta.message!!)
-                    }else{
-                        UI.snackbarTop(binding.forgotWhatsappNo, Constants.SERVER_ERROR)
-                    }
-                }
-                else -> UI.snackbarTop(binding.forgotWhatsappNo, response.toString())
+            if (response.meta.code == 200){
+                startActivity(Intent(this@ForgotPasswordActivity, CodeVerificationActivity::class.java).putExtra("whatsappNo", binding.forgotWhatsappNo.text.toString()))
+            }else{
+                UI.showSnackbarByResponseCode(response.meta, binding.forgotWhatsappNo)
             }
         }
     }

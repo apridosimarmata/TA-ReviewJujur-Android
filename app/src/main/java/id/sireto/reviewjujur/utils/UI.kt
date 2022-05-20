@@ -4,6 +4,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import com.google.android.material.snackbar.Snackbar
+import id.sireto.reviewjujur.models.Meta
 
 object UI {
     fun snackbarTop(view: View, msg : String){
@@ -19,5 +20,19 @@ object UI {
         Snackbar.make(
             view, msg, Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    fun showSnackbarByResponseCode(meta : Meta, view: View){
+        when(meta.code){
+            in 400 .. 450 -> meta.message?.let { snackbar(view, it) }
+            in 500 .. 550 -> {
+                if(meta.message!=null){
+                    snackbarTop(view, meta.message!!)
+                }else{
+                    snackbarTop(view, Constants.SERVER_ERROR)
+                }
+            }
+            else -> snackbarTop(view, Constants.UNKNOWN_ERROR)
+        }
     }
 }

@@ -21,4 +21,10 @@ interface ApiService {
 
     @GET("/auth/authorization/refresh")
     suspend fun refreshUserToken(@Header("Access-Refresh-Token") refreshToken : String) : Response<BaseResponse>
+
+    @GET("/businesses/provinces")
+    suspend fun getAllProvinces() : Response<BaseResponse>
+
+    @GET("/businesses/locations/{provinceUid}")
+    suspend fun getLocationsByProvinceUid(@Path("provinceUid") provinceUid : String) : Response<BaseResponse>
 }

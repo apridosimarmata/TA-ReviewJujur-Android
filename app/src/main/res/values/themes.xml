@@ -88,4 +88,18 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#474747</item>
     </style>
+
+    <style name="heading">
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="heading.big">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="heading.medium">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>
