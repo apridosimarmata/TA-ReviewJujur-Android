@@ -27,4 +27,7 @@ interface ApiService {
 
     @GET("/businesses/locations/{provinceUid}")
     suspend fun getLocationsByProvinceUid(@Path("provinceUid") provinceUid : String) : Response<BaseResponse>
+
+    @GET("/businesses/search?")
+    suspend fun searchBusiness(@Query("limit") limit : Int?, @Query("page") page : Int?, @Query("locationUid") locationUid : String, @Query("search") businessName : String?) : Response<BaseResponse>
 }

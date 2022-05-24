@@ -16,10 +16,10 @@ data class BusinessResponse(
     val provinceUid : String,
 
     @SerializedName("name")
-    val name : String,
+    var name : String,
 
     @SerializedName("address")
-    val address : String,
+    var address : String,
 
     @SerializedName("photo")
     val photo: String,
