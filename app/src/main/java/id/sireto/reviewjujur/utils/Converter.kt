@@ -18,9 +18,13 @@ object Converter {
     private fun anyToBusinessResponse(any: LinkedTreeMap<String, Any>) =
         BusinessResponse(
             any["uid"].toString(),
+            any["reviews_count"].toString().split(".")[0].toInt(),
+            any["total_score"].toString().split(".")[0].toInt(),
             any["owner_uid"].toString(),
             any["location_uid"].toString(),
             any["province_uid"].toString(),
+            any["location"].toString(),
+            any["province"].toString(),
             any["name"].toString(),
             any["address"].toString(),
             any["photo"].toString(),
@@ -30,7 +34,16 @@ object Converter {
 
 
     fun anyToBusinessPagination(any: LinkedTreeMap<String, Any>) : BusinessPagination {
-        val result = BusinessPagination(any["limit"].toString().split(".")[0].toInt(), any["page"].toString().split(".")[0].toInt(), any["sort"].toString(), any["search"].toString(), any["location_uid"].toString(), arrayListOf())
+        val result = BusinessPagination(
+            any["limit"].toString().split(".")[0].toInt(),
+            any["page"].toString().split(".")[0].toInt(),
+            any["sort"].toString(),
+            any["search"].toString(),
+            any["location_uid"].toString(),
+            arrayListOf(),
+            any["location"].toString(),
+            any["province"].toString()
+        )
         (any["rows"] as List<Any>).map {
             result.rows.add(anyToBusinessResponse(it as LinkedTreeMap<String, Any>))
         }

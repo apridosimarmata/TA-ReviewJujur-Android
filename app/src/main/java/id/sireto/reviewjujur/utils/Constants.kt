@@ -14,4 +14,6 @@ object Constants {
     var KEY_REFRESH_TOKEN = "refresh_token"
 
     var KEY_SELECTED_LOCATION = "selected_location_uid"
+    var KEY_MOST_REVIEW = "reviews_count"
+    var KEY_BEST_SCORE = "total_score/reviews_count"
 }

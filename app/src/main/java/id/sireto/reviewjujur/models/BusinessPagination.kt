@@ -19,5 +19,11 @@ data class BusinessPagination(
     var locationUid : String,
 
     @SerializedName("rows")
-    var rows : ArrayList<BusinessResponse>
+    var rows : ArrayList<BusinessResponse>,
+
+    @SerializedName("location")
+    val location : String,
+
+    @SerializedName("province")
+    val province : String,
 )

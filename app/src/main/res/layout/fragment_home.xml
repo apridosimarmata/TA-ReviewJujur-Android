@@ -138,7 +138,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Parapat,"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -151,7 +150,6 @@
                 style="@style/heading.medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sumatera Utara"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -166,6 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Review Terbanyak"
+                android:textColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -177,7 +176,7 @@
                 android:id="@+id/rv_mostReview"
                 android:layout_width="0dp"
                 android:layout_height="170dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -193,6 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Nilai Terbaik"
+                android:textColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -238,6 +238,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_reviewed"
                 tools:listitem="@layout/resto_main_card" />
+
+            <TextView
+                android:id="@+id/home_see_more_most_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/see_more"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/home_mostReview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/home_mostReview"
+                app:layout_constraintTop_toTopOf="@+id/home_mostReview" />
+
+            <TextView
+                android:id="@+id/home_see_more_best_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/see_more"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/home_bestScore"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/home_bestScore"
+                app:layout_constraintTop_toTopOf="@+id/home_bestScore" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

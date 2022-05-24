@@ -6,6 +6,12 @@ data class BusinessResponse(
     @SerializedName("uid")
     val uid : String,
 
+    @SerializedName("reviews_count")
+    val reviewsCount : Int,
+
+    @SerializedName("total_score")
+    val totalScore : Int,
+
     @SerializedName("owner_uid")
     val onwerUid : String,
 
@@ -14,6 +20,12 @@ data class BusinessResponse(
 
     @SerializedName("province_uid")
     val provinceUid : String,
+
+    @SerializedName("location")
+    var location : String,
+
+    @SerializedName("province")
+    var province : String,
 
     @SerializedName("name")
     var name : String,
@@ -30,5 +42,5 @@ data class BusinessResponse(
     @SerializedName("modified_at")
     val modifiedAt : String
 ) {
-    constructor() : this("", "", "", "", "", "", "", "", "")
+    constructor() : this("", 0, 0,"", "", "", "", "", "", "", "", "", "")
 }

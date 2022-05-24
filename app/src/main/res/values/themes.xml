@@ -85,8 +85,9 @@
     </style>
 
     <style name="card_text.medium">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">#474747</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#555555</item>
     </style>
 
     <style name="heading">

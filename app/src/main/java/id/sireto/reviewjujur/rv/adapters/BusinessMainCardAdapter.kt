@@ -3,10 +3,11 @@ package id.sireto.reviewjujur.rv.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import id.sireto.reviewjujur.databinding.RestoMainCardBinding
 import id.sireto.reviewjujur.models.BusinessResponse
 
-class RestoMainCardAdapter() : RecyclerView.Adapter<RestoMainCardAdapter.RestoMainCardViewHolder>() {
+class BusinessMainCardAdapter() : RecyclerView.Adapter<BusinessMainCardAdapter.RestoMainCardViewHolder>() {
 
     var businesses = arrayListOf<BusinessResponse>()
 
@@ -14,6 +15,15 @@ class RestoMainCardAdapter() : RecyclerView.Adapter<RestoMainCardAdapter.RestoMa
         fun bind(business : BusinessResponse){
             binding.restoMaiNRestoName.text = business.name
             binding.restoMainAddress.text = business.address
+            binding.restoMainRating.text = if (business.reviewsCount == 0){
+                "-"
+            } else{
+                "${(business.totalScore/business.reviewsCount)} (${business.reviewsCount})"
+            }
+
+            Glide.with(binding.restoImage)
+                .load("https://www.pinhome.id/info-area/wp-content/uploads/2022/03/cafe-di-Banda-Aceh.jpg")
+                .into(binding.restoImage)
         }
     }
 
