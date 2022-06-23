@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASEURL = "https://gateway-ta.aprido.my.id/"
+const val BASEURL = "https://ta.aprido.my.id/"
 class ApiClient {
     companion object{
         private var retrofit: Retrofit?=null

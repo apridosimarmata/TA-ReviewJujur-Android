@@ -1,6 +1,7 @@
 package id.sireto.reviewjujur.main
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -41,6 +42,7 @@ class ChooseLocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseLocationBinding.inflate(layoutInflater)
+        SharedPref.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         setContentView(binding.root)
         setupListeners()
         setupProvinces()

@@ -1,13 +1,17 @@
 package id.sireto.reviewjujur.rv.adapters
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.sireto.reviewjujur.databinding.RestoMainCardBinding
+import id.sireto.reviewjujur.main.business.BusinessDetailsActivity
 import id.sireto.reviewjujur.models.BusinessResponse
+import java.io.Serializable
 
-class BusinessMainCardAdapter() : RecyclerView.Adapter<BusinessMainCardAdapter.RestoMainCardViewHolder>() {
+class BusinessMainCardAdapter(private val activity: Activity) : RecyclerView.Adapter<BusinessMainCardAdapter.RestoMainCardViewHolder>() {
 
     var businesses = arrayListOf<BusinessResponse>()
 
@@ -22,7 +26,8 @@ class BusinessMainCardAdapter() : RecyclerView.Adapter<BusinessMainCardAdapter.R
             }
 
             Glide.with(binding.restoImage)
-                .load("https://www.pinhome.id/info-area/wp-content/uploads/2022/03/cafe-di-Banda-Aceh.jpg")
+                .load(business.photo)
+                .centerCrop()
                 .into(binding.restoImage)
         }
     }
@@ -32,6 +37,9 @@ class BusinessMainCardAdapter() : RecyclerView.Adapter<BusinessMainCardAdapter.R
 
     override fun onBindViewHolder(holder: RestoMainCardViewHolder, position: Int) {
         holder.bind(businesses[position])
+        holder.itemView.setOnClickListener {
+            activity.startActivity(Intent(activity, BusinessDetailsActivity::class.java).putExtra("business", businesses[position] as Serializable))
+        }
     }
 
     override fun getItemCount(): Int = businesses.size

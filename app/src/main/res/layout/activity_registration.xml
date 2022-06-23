@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/textView"
-            style="@style/page_heading"
+            style="@style/page_heading.medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buat Akun"

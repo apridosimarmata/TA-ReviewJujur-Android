@@ -1,6 +1,7 @@
 package id.sireto.reviewjujur.main
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import id.sireto.reviewjujur.databinding.ActivityHomeBinding
 import id.sireto.reviewjujur.main.home.HomeFragment
 import id.sireto.reviewjujur.main.profile.ProfileFragment
 import id.sireto.reviewjujur.main.reviews.ReviewsFragment
+import id.sireto.reviewjujur.main.scan.ScanActivity
 import id.sireto.reviewjujur.utils.Auth
 import id.sireto.reviewjujur.utils.UI
 
@@ -38,6 +40,13 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setupSections()
+        setupListeners()
+    }
+
+    private fun setupListeners(){
+        binding.homeScan.setOnClickListener{
+            startActivity(Intent(this, ScanActivity::class.java))
+        }
     }
 
     private fun setupSections(){

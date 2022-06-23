@@ -6,7 +6,7 @@ import id.sireto.reviewjujur.models.*
 
 object Converter {
     fun anyToAthenticationResponse(any : LinkedTreeMap<String, Any>) =
-        AuthenticationResponse(any["token"].toString(), any["refresh_token"].toString())
+        AuthenticationResponse(any["token"].toString(), any["refreshToken"].toString())
 
 
     fun anyToProvinceResponse(any: LinkedTreeMap<String, Any>) =
@@ -15,21 +15,21 @@ object Converter {
     fun anyToLocationResponse(any: LinkedTreeMap<String, Any>) =
         LocationResponse(any["uid"].toString(), any["province_uid"].toString() ,any["name"].toString())
 
-    private fun anyToBusinessResponse(any: LinkedTreeMap<String, Any>) =
+    fun anyToBusinessResponse(any: LinkedTreeMap<String, Any>) =
         BusinessResponse(
             any["uid"].toString(),
-            any["reviews_count"].toString().split(".")[0].toInt(),
-            any["total_score"].toString().split(".")[0].toInt(),
-            any["owner_uid"].toString(),
-            any["location_uid"].toString(),
-            any["province_uid"].toString(),
+            any["reviewsCount"].toString().split(".")[0].toInt(),
+            any["totalScore"].toString().split(".")[0].toInt(),
+            any["ownerUid"].toString(),
+            any["locationUid"].toString(),
+            any["provinceUid"].toString(),
             any["location"].toString(),
             any["province"].toString(),
             any["name"].toString(),
             any["address"].toString(),
             any["photo"].toString(),
-            any["created_at"].toString(),
-            any["modified_at"].toString(),
+            any["createdAt"].toString(),
+            any["modifiedAt"].toString(),
         )
 
 
@@ -39,7 +39,7 @@ object Converter {
             any["page"].toString().split(".")[0].toInt(),
             any["sort"].toString(),
             any["search"].toString(),
-            any["location_uid"].toString(),
+            any["locationUid"].toString(),
             arrayListOf(),
             any["location"].toString(),
             any["province"].toString()
@@ -50,4 +50,16 @@ object Converter {
 
         return result
     }
+
+    fun anyToReviewResponse(any: LinkedTreeMap<String, Any>) : ReviewResponse =
+        ReviewResponse(
+            any["userUid"].toString(),
+            any["businessUid"].toString(),
+            any["text"].toString(),
+            any["uid"].toString(),
+            any["score"].toString().toFloat().toInt(),
+            any["createdAt"].toString().toFloat().toInt(),
+            any["status"].toString(),
+        )
+
 }

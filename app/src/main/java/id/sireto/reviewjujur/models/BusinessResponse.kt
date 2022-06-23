@@ -1,24 +1,25 @@
 package id.sireto.reviewjujur.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class BusinessResponse(
     @SerializedName("uid")
     val uid : String,
 
-    @SerializedName("reviews_count")
+    @SerializedName("reviewsCount")
     val reviewsCount : Int,
 
-    @SerializedName("total_score")
+    @SerializedName("totalScore")
     val totalScore : Int,
 
-    @SerializedName("owner_uid")
+    @SerializedName("ownerUid")
     val onwerUid : String,
 
-    @SerializedName("location_uid")
+    @SerializedName("locationUid")
     val locationUid : String,
 
-    @SerializedName("province_uid")
+    @SerializedName("provinceUid")
     val provinceUid : String,
 
     @SerializedName("location")
@@ -36,11 +37,11 @@ data class BusinessResponse(
     @SerializedName("photo")
     val photo: String,
 
-    @SerializedName("created_at")
+    @SerializedName("createdAt")
     val createdAt : String,
 
-    @SerializedName("modified_at")
+    @SerializedName("modifiedAt")
     val modifiedAt : String
-) {
+) : Serializable {
     constructor() : this("", 0, 0,"", "", "", "", "", "", "", "", "", "")
 }

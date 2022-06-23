@@ -6,7 +6,7 @@ data class AuthenticationResponse (
     @SerializedName("token")
     val token : String,
 
-    @SerializedName("refresh_token")
+    @SerializedName("refreshToken")
     val refreshToken : String
 ) {
     constructor() : this("", "")

@@ -6,7 +6,7 @@ data class LocationResponse(
     @SerializedName("uid")
     val uid : String,
 
-    @SerializedName("province_uid")
+    @SerializedName("provinceUid")
     val provinceUid : String,
 
     @SerializedName("name")

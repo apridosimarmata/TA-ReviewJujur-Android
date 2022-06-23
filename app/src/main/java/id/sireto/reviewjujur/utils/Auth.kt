@@ -50,9 +50,10 @@ object Auth {
         }
     }
 
-    private suspend fun refreshUserToken(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit){
+    suspend fun refreshUserToken(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit){
 
         val refreshToken = SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
+        Log.d("ini refresh token", refreshToken.toString())
 
         lifecycleCoroutineScope.launch(Dispatchers.IO){
             val refresh = lifecycleCoroutineScope.async {
@@ -73,5 +74,13 @@ object Auth {
             }
         }
 
+    }
+
+    fun getToken(context: Context) : String? {
+        return SharedPref.getFromSharedPref(context, Constants.KEY_TOKEN)
+    }
+
+    fun getRefreshToken(context: Context) : String? {
+        return SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
     }
 }

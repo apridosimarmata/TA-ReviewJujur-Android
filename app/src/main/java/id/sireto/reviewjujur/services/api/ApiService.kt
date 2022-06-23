@@ -1,6 +1,7 @@
 package id.sireto.reviewjujur.services.api
 
 import id.sireto.reviewjujur.models.BaseResponse
+import id.sireto.reviewjujur.models.ReviewPost
 import id.sireto.reviewjujur.models.UserEmailAuthenticationPost
 import id.sireto.reviewjujur.models.UserPost
 import retrofit2.Response
@@ -30,4 +31,13 @@ interface ApiService {
 
     @GET("/businesses/search?")
     suspend fun searchBusiness(@Query("limit") limit : Int?, @Query("page") page : Int?, @Query("locationUid") locationUid : String, @Query("search") businessName : String?, @Query("sort") sort : String?) : Response<BaseResponse>
+
+    @GET("/businesses/{businessUid}")
+    suspend fun getBusinessByUid(@Path("businessUid") businessUid : String) : Response<BaseResponse>
+
+    @POST("/reviews")
+    suspend fun createReview(@Header("Access-Token") accessToken : String, @Header("Access-Refresh-Token") refreshToken : String, @Body review : ReviewPost) : Response<BaseResponse>
+
+    @GET("/reviews/business")
+    suspend fun getBusinessReviews(@Query("businessUid") businessUid : String, @Query("createdAt") createdAt : Int?) : Response<BaseResponse>
 }

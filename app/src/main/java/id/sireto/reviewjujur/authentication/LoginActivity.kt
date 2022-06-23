@@ -89,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
             if (response.meta.code == 200){
                 response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
                 var authenticationResponse = Converter.anyToAthenticationResponse(response.result as LinkedTreeMap<String, Any>)
+                Log.d("login refresh", authenticationResponse.refreshToken)
                 Auth.saveTokenDetails(this@LoginActivity, authenticationResponse.token, authenticationResponse.refreshToken)
                 this@LoginActivity.finish()
                 startActivity(Intent(this@LoginActivity, HomeActivity::class.java))

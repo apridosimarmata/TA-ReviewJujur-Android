@@ -1,5 +1,6 @@
 package id.sireto.reviewjujur.main.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -38,6 +39,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var rvMostReviewedBusiness : RecyclerView
     private lateinit var rvBestScoringBusinesses : RecyclerView
+    private lateinit var mostReviewedRvAdapter: BusinessMainCardAdapter
+    private lateinit var bestScoringRvAdapter: BusinessMainCardAdapter
     private val mostReviewedBusinesses = arrayListOf<BusinessResponse>()
     private val bestScoringBusinesses = arrayListOf<BusinessResponse>()
 
@@ -67,8 +70,10 @@ class HomeFragment : Fragment() {
         setupListeners()
         rvMostReviewedBusiness = binding.rvMostReview
         rvMostReviewedBusiness.addItemDecoration(HorizontalDecorator(20))
+        mostReviewedRvAdapter = BusinessMainCardAdapter(requireActivity())
         rvBestScoringBusinesses = binding.rvBestScore
         rvBestScoringBusinesses.addItemDecoration(HorizontalDecorator(20))
+        bestScoringRvAdapter = BusinessMainCardAdapter(requireActivity())
         return binding.root
     }
 
@@ -104,7 +109,7 @@ class HomeFragment : Fragment() {
     private fun setupBusinesses(locationUid: String){
         loadedBefore = true
 
-        var businessPagination =
+        val businessPagination =
             BusinessPagination(
                 locationUid = locationUid,
                 limit = null,
@@ -120,8 +125,10 @@ class HomeFragment : Fragment() {
         setupBestScoringBusinesses(businessPagination)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupBestScoringBusinesses(businessPagination: BusinessPagination){
         bestScoringBusinesses.clear()
+
         lifecycleScope.launch(Dispatchers.Main){
 
             val getBestScoringBusinesses = lifecycleScope.async {
@@ -155,14 +162,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun showBestScoringBusinesses(){
-        val adapter = BusinessMainCardAdapter()
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        adapter.businesses.clear()
-        adapter.notifyDataSetChanged()
+        bestScoringRvAdapter.businesses.clear()
+        bestScoringRvAdapter.notifyDataSetChanged()
         rvBestScoringBusinesses.layoutManager = layoutManager
-        rvBestScoringBusinesses.adapter = adapter
-        adapter.businesses.addAll(bestScoringBusinesses)
-        adapter.notifyDataSetChanged()
+        rvBestScoringBusinesses.adapter = bestScoringRvAdapter
+        bestScoringRvAdapter.businesses.addAll(bestScoringBusinesses)
+        bestScoringRvAdapter.notifyDataSetChanged()
 
         rvBestScoringBusinesses.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
 
@@ -181,8 +187,10 @@ class HomeFragment : Fragment() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupMostReviewBusinesses(businessPagination : BusinessPagination){
         mostReviewedBusinesses.clear()
+
         lifecycleScope.launch(Dispatchers.Main){
 
             val getMostReviewedBusinesses = lifecycleScope.async {
@@ -216,14 +224,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun showMostReviewedBusiness(){
-        val adapter = BusinessMainCardAdapter()
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        adapter.businesses.clear()
-        adapter.notifyDataSetChanged()
+        mostReviewedRvAdapter.businesses.clear()
+        mostReviewedRvAdapter.notifyDataSetChanged()
         rvMostReviewedBusiness.layoutManager = layoutManager
-        rvMostReviewedBusiness.adapter = adapter
-        adapter.businesses.addAll(mostReviewedBusinesses)
-        adapter.notifyDataSetChanged()
+        rvMostReviewedBusiness.adapter = mostReviewedRvAdapter
+        mostReviewedRvAdapter.businesses.addAll(mostReviewedBusinesses)
+        mostReviewedRvAdapter.notifyDataSetChanged()
 
         rvMostReviewedBusiness.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
 
@@ -253,6 +260,8 @@ class HomeFragment : Fragment() {
             rvBestScore.visibility = invisible
             rvMostReview.visibility = invisible
             rvReviewed.visibility = invisible
+            homeSeeMoreBestScore.visibility = invisible
+            homeSeeMoreMostReview.visibility = invisible
         }
     }
 
@@ -267,6 +276,8 @@ class HomeFragment : Fragment() {
             rvBestScore.visibility = visible
             rvMostReview.visibility = visible
             rvReviewed.visibility = visible
+            homeSeeMoreBestScore.visibility = visible
+            homeSeeMoreMostReview.visibility = visible
         }
     }
 }

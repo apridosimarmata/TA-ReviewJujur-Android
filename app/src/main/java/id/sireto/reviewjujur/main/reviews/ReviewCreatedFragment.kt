@@ -5,26 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import id.sireto.reviewjujur.R
-import id.sireto.reviewjujur.databinding.FragmentReviewsBinding
-import id.sireto.reviewjujur.models.BaseResponse
-import id.sireto.reviewjujur.models.ReviewResponse
-import id.sireto.reviewjujur.services.api.ApiService
-import retrofit2.Retrofit
+import id.sireto.reviewjujur.databinding.FragmentReviewCreatedBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ReviewsFragment : Fragment() {
+class ReviewCreatedFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding: FragmentReviewsBinding
-    private lateinit var apiService: ApiService
-    private lateinit var retrofit: Retrofit
-    private var response = BaseResponse()
-    private var reviews = arrayListOf<ReviewResponse>()
-    private lateinit var reviewsRecyclerView : RecyclerView
+    private lateinit var binding: FragmentReviewCreatedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +28,7 @@ class ReviewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentReviewsBinding.inflate(layoutInflater)
-        setupUserReviewsRecyclerView()
+        binding = FragmentReviewCreatedBinding.inflate(layoutInflater)
         return binding.root
-    }
-
-    private fun setupUserReviewsRecyclerView(){
-
     }
 }

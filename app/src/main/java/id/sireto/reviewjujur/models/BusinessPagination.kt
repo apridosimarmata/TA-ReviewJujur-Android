@@ -15,7 +15,7 @@ data class BusinessPagination(
     @SerializedName("search")
     var search : String?,
 
-    @SerializedName("location_uid")
+    @SerializedName("locationUid")
     var locationUid : String,
 
     @SerializedName("rows")
