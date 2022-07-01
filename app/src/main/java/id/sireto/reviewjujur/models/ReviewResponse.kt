@@ -19,7 +19,7 @@ data class ReviewResponse(
     val score : Int,
 
     @SerializedName("createdAt")
-    val createdAt: Int,
+    val createdAt: String,
 
     @SerializedName("status")
     val status: String

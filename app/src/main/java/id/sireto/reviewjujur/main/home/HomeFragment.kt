@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.databinding.FragmentHomeBinding
 import id.sireto.reviewjujur.main.ChooseLocationActivity
+import id.sireto.reviewjujur.main.SearchActivity
 import id.sireto.reviewjujur.models.*
 import id.sireto.reviewjujur.rv.adapters.BusinessMainCardAdapter
 import id.sireto.reviewjujur.rv.decorators.HorizontalDecorator
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
         }
         retrofit = ApiClient.getApiClient()
         apiService = retrofit.create(ApiService::class.java)
-        previousSelectedLocationUid = SharedPref.getFromSharedPref(requireActivity().applicationContext, Constants.KEY_SELECTED_LOCATION)
+        previousSelectedLocationUid = SharedPref.getStringFromSharedPref(Constants.KEY_SELECTED_LOCATION)
     }
 
     override fun onCreateView(
@@ -81,11 +82,17 @@ class HomeFragment : Fragment() {
         binding.homeChooseLocationBtn.setOnClickListener{
             startActivity(Intent(requireActivity(), ChooseLocationActivity::class.java))
         }
+
+        binding.homeFragmentSearch.onFocusChangeListener = (View.OnFocusChangeListener { p0, p1 ->
+            if(p1){
+                startActivity(Intent(requireContext(), SearchActivity::class.java))
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        with(SharedPref.getFromSharedPref(requireContext(), Constants.KEY_SELECTED_LOCATION)){
+        with(SharedPref.getStringFromSharedPref(Constants.KEY_SELECTED_LOCATION)){
             if (this != null){
                 binding.homeLocationNotChoosen.visibility = View.INVISIBLE
                 showDetails()

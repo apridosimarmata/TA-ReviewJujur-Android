@@ -2,7 +2,7 @@ package id.sireto.reviewjujur.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserPost(
+data class UserResponse(
     @SerializedName("name")
     var name : String,
 
@@ -10,8 +10,7 @@ data class UserPost(
     var email : String,
 
     @SerializedName("whatsappNo")
-    var whatsappNo : String,
-
-    @SerializedName("password")
-    var password : String
-)
+    var whatsappNo : String
+) {
+    constructor() : this("","", "")
+}

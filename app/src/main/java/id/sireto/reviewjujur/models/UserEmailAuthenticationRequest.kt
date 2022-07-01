@@ -2,7 +2,7 @@ package id.sireto.reviewjujur.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserEmailAuthenticationPost(
+data class UserEmailAuthenticationRequest(
     @SerializedName("email")
     val email : String,
 

@@ -7,17 +7,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.databinding.ActivityRegistrationBinding
-import id.sireto.reviewjujur.main.HomeActivity
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
-import id.sireto.reviewjujur.models.UserPost
+import id.sireto.reviewjujur.models.UserRequest
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
-import id.sireto.reviewjujur.utils.Auth
 import id.sireto.reviewjujur.utils.Constants
-import id.sireto.reviewjujur.utils.Converter
 import id.sireto.reviewjujur.utils.UI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -54,7 +50,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun registerUser(){
-        val user = UserPost(
+        val user = UserRequest(
             binding.registrationName.text.toString(),
             binding.registrationEmail.text.toString(),
             binding.registrationWhatsappNumber.text.toString(),

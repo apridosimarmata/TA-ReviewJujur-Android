@@ -1,20 +1,42 @@
 package id.sireto.reviewjujur.utils
 
-import android.content.Context
 import android.content.SharedPreferences
 
 object SharedPref {
     lateinit var sharedPreferences : SharedPreferences
 
-    fun saveToSharedPref(context : Context, key : String, value : String){
+    fun saveToStringSharedPref(key: String, value: String){
         with(sharedPreferences.edit()){
             putString(key, value)
                 .commit()
         }
     }
 
-    fun getFromSharedPref(context : Context, key : String) : String?{
+    fun saveToBooleanSharedPref(key: String, value: Boolean){
+        with(sharedPreferences.edit()){
+            putBoolean(key, value)
+                .commit()
+        }
+    }
+
+    fun getStringFromSharedPref(key: String) : String? {
         return sharedPreferences.getString(key, null)
+    }
+
+    fun getBooleanFromSharedPref(key: String) : Boolean {
+        return sharedPreferences.getBoolean(key, false)
+    }
+
+    fun removeFromSharedPref(key: String) {
+        sharedPreferences.edit().remove(key).apply()
+    }
+
+    fun removeAccessTokens(){
+        with(sharedPreferences.edit()){
+            remove(Constants.KEY_TOKEN)
+            remove(Constants.KEY_REFRESH_TOKEN)
+                .apply()
+        }
     }
 
 }

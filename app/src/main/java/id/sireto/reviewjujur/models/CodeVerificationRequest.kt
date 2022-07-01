@@ -2,7 +2,7 @@ package id.sireto.reviewjujur.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CodeVerificationPost(
+data class CodeVerificationRequest(
     @SerializedName("whatsappNo")
     val whatsappNo : String,
 

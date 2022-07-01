@@ -8,6 +8,8 @@ object Converter {
     fun anyToAthenticationResponse(any : LinkedTreeMap<String, Any>) =
         AuthenticationResponse(any["token"].toString(), any["refreshToken"].toString())
 
+    fun anyToUserResponse(any : LinkedTreeMap<String, Any>) =
+        UserResponse(any["name"].toString(), any["email"].toString(), any["whatsappNo"].toString())
 
     fun anyToProvinceResponse(any: LinkedTreeMap<String, Any>) =
         ProvinceResponse(any["uid"].toString(), any["name"].toString())
@@ -58,7 +60,7 @@ object Converter {
             any["text"].toString(),
             any["uid"].toString(),
             any["score"].toString().toFloat().toInt(),
-            any["createdAt"].toString().toFloat().toInt(),
+            any["createdAt"].toString(),
             any["status"].toString(),
         )
 

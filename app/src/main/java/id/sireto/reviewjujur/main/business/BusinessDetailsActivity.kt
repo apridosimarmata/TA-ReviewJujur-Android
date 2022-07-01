@@ -49,18 +49,14 @@ class BusinessDetailsActivity : AppCompatActivity() {
         apiService = retrofit.create(ApiService::class.java)
 
         setupReviewsRecyclerView()
-        getBusinessReviews(null)
+        getBusinessReviews("0")
     }
 
-    private fun getBusinessReviews(createdAt : Int?){
+    private fun getBusinessReviews(createdAt : String){
         lifecycleScope.launch(Dispatchers.Main){
             val getReviews = lifecycleScope.async {
                 response = try {
-                    if(createdAt != null){
-                        apiService.getBusinessReviews(business.uid, createdAt).body()!!
-                    }else {
-                        apiService.getBusinessReviews(business.uid, null).body()!!
-                    }
+                    apiService.getBusinessReviews(business.uid, createdAt).body()!!
                 }catch (e: Exception){
                     BaseResponse(Meta(code = 0, message = "Error : ${e.cause}"), null)
                 }
@@ -105,7 +101,7 @@ class BusinessDetailsActivity : AppCompatActivity() {
         }
 
         Glide.with(binding.businessDetailsPhoto)
-            .load(business.photo)
+            .load(Constants.CDN + business.photo + ".png")
             .centerCrop()
             .into(binding.businessDetailsPhoto)
     }

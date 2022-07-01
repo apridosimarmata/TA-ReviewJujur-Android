@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import id.sireto.reviewjujur.databinding.RestoMainCardBinding
 import id.sireto.reviewjujur.main.business.BusinessDetailsActivity
 import id.sireto.reviewjujur.models.BusinessResponse
+import id.sireto.reviewjujur.utils.Constants
 import java.io.Serializable
 
 class BusinessMainCardAdapter(private val activity: Activity) : RecyclerView.Adapter<BusinessMainCardAdapter.RestoMainCardViewHolder>() {
@@ -26,8 +27,8 @@ class BusinessMainCardAdapter(private val activity: Activity) : RecyclerView.Ada
             }
 
             Glide.with(binding.restoImage)
-                .load(business.photo)
-                .centerCrop()
+                .load(Constants.CDN + business.photo + ".png")
+                .centerInside()
                 .into(binding.restoImage)
         }
     }

@@ -1,11 +1,8 @@
 package id.sireto.reviewjujur.utils
 
 import android.content.Context
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.lifecycle.LifecycleCoroutineScope
 import com.google.gson.internal.LinkedTreeMap
-import id.sireto.reviewjujur.models.AuthenticationResponse
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
 import id.sireto.reviewjujur.services.api.ApiClient
@@ -22,14 +19,14 @@ object Auth {
     private var response = BaseResponse()
 
     fun saveTokenDetails(context: Context, token : String, refreshToken : String){
-        SharedPref.saveToSharedPref(context, Constants.KEY_TOKEN, token)
-        SharedPref.saveToSharedPref(context, Constants.KEY_REFRESH_TOKEN, refreshToken)
+        SharedPref.saveToStringSharedPref(Constants.KEY_TOKEN, token)
+        SharedPref.saveToStringSharedPref(Constants.KEY_REFRESH_TOKEN, refreshToken)
     }
 
     suspend fun authUser(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit) {
 
-        val token = SharedPref.getFromSharedPref(context, Constants.KEY_TOKEN)
-        val refreshToken = SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
+        val token = SharedPref.getStringFromSharedPref(Constants.KEY_TOKEN)
+        val refreshToken = SharedPref.getStringFromSharedPref(Constants.KEY_REFRESH_TOKEN)
 
         lifecycleCoroutineScope.launch(Dispatchers.IO){
             val auth = lifecycleCoroutineScope.async {
@@ -52,8 +49,7 @@ object Auth {
 
     suspend fun refreshUserToken(lifecycleCoroutineScope: LifecycleCoroutineScope, context: Context, callback : (result : Boolean) -> Unit){
 
-        val refreshToken = SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
-        Log.d("ini refresh token", refreshToken.toString())
+        val refreshToken = SharedPref.getStringFromSharedPref(Constants.KEY_REFRESH_TOKEN)
 
         lifecycleCoroutineScope.launch(Dispatchers.IO){
             val refresh = lifecycleCoroutineScope.async {
@@ -77,10 +73,10 @@ object Auth {
     }
 
     fun getToken(context: Context) : String? {
-        return SharedPref.getFromSharedPref(context, Constants.KEY_TOKEN)
+        return SharedPref.getStringFromSharedPref(Constants.KEY_TOKEN)
     }
 
     fun getRefreshToken(context: Context) : String? {
-        return SharedPref.getFromSharedPref(context, Constants.KEY_REFRESH_TOKEN)
+        return SharedPref.getStringFromSharedPref(Constants.KEY_REFRESH_TOKEN)
     }
 }

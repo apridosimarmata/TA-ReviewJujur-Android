@@ -6,32 +6,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.internal.LinkedTreeMap
-import id.sireto.reviewjujur.databinding.ActivityForgotPasswordBinding
+import id.sireto.reviewjujur.databinding.ActivityRequestVerificationCodeBinding
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
 import id.sireto.reviewjujur.utils.Constants
-import id.sireto.reviewjujur.utils.Converter
 import id.sireto.reviewjujur.utils.UI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import java.lang.Exception
+import kotlin.properties.Delegates
 
-class ForgotPasswordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityForgotPasswordBinding
+class RequestVerificationCodeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRequestVerificationCodeBinding
     private lateinit var apiService: ApiService
     private lateinit var retrofit: Retrofit
     private var response = BaseResponse()
+    private var type by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
+
+        type = intent.getIntExtra("type", 0)
+
+        binding = ActivityRequestVerificationCodeBinding.inflate(layoutInflater)
+
+        if(type==Constants.FORGOT_PASSWORD){
+            binding.requestCodeTitle.text = Constants.TITLE_FORGOT_PASSWORD
+        }else{
+            binding.requestCodeTitle.text = Constants.TITLE_VERIFY_ACCOUNT
+        }
 
         retrofit = ApiClient.getApiClient()
         apiService = retrofit.create(ApiService::class.java)
@@ -42,7 +50,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun setupValidators(){
-        binding.forgotWhatsappNo.addTextChangedListener(object : TextWatcher {
+        binding.requestVerificationCodePhone.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -54,9 +62,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 with(p0.toString()){
                     if (this.length < 9){
-                        binding.forgotWhatsappNo.error = "Nomor terlalu pendek"
+                        binding.requestVerificationCodePhone.error = "Nomor terlalu pendek"
                     }else if (this.length > 14){
-                        binding.forgotWhatsappNo.error = "Nomor terlalu panjang"
+                        binding.requestVerificationCodePhone.error = "Nomor terlalu panjang"
                     }
                 }
             }
@@ -65,10 +73,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun setupListeners(){
-        binding.forgotSendCode.setOnClickListener {
+        binding.requestVerificationSendCode.setOnClickListener {
             with(binding){
-                if (forgotWhatsappNo.text.toString().isEmpty()) {
-                    binding.forgotWhatsappNo.error = "Silakan isi nomor WhatsApp"
+                if (requestVerificationCodePhone.text.toString().isEmpty()) {
+                    binding.requestVerificationCodePhone.error = "Silakan isi nomor WhatsApp"
                 } else {
                     sendVerificationCode()
                 }
@@ -79,12 +87,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun sendVerificationCode(){
         lifecycleScope.launch(Dispatchers.Main){
-            val progress = ProgressDialog(this@ForgotPasswordActivity)
+            val progress = ProgressDialog(this@RequestVerificationCodeActivity)
             progress.setMessage("Mengirim kode ...")
             progress.show()
             val sendCode = lifecycleScope.async {
                 response = try {
-                    apiService.requestUserVerificationCode(binding.forgotWhatsappNo.text.toString()).body()!!
+                    apiService.requestUserVerificationCode(binding.requestVerificationCodePhone.text.toString()).body()!!
                 }catch (e : Exception){
                     BaseResponse(Meta(code = 0, message = "Error : ${e.cause}"), null)
                 }
@@ -93,9 +101,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
             progress.dismiss()
 
             if (response.meta.code == 200){
-                startActivity(Intent(this@ForgotPasswordActivity, CodeVerificationActivity::class.java).putExtra("whatsappNo", binding.forgotWhatsappNo.text.toString()))
+                val intent = Intent(this@RequestVerificationCodeActivity, CodeVerificationActivity::class.java)
+                intent.putExtra("whatsappNo", binding.requestVerificationCodePhone.text.toString())
+                intent.putExtra("type", type)
+                startActivity(intent)
             }else{
-                UI.showSnackbarByResponseCode(response.meta, binding.forgotWhatsappNo)
+                UI.showSnackbarByResponseCode(response.meta, binding.requestVerificationCodePhone)
             }
         }
     }

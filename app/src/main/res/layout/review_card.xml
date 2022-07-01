@@ -9,8 +9,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:minHeight="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,14 +27,15 @@
                 android:id="@+id/review_card_business_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".5"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -79,6 +81,21 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/review_card_text"
                 app:layout_constraintTop_toBottomOf="@+id/review_card_text" />
+
+            <TextView
+                android:id="@+id/review_card_business_name"
+                style="@style/card_text.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:maxEms="20"
+                android:text="Toko Ceria"
+                app:layout_constraintBottom_toBottomOf="@+id/review_card_created_at"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/review_card_status"
+                app:layout_constraintTop_toTopOf="@+id/review_card_created_at" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

@@ -90,6 +90,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="tab_style">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="card_text.big">
         <item name="android:textSize">13sp</item>
     </style>

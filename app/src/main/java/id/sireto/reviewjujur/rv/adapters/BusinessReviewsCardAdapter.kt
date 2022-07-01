@@ -21,7 +21,7 @@ class BusinessReviewsCardAdapter : RecyclerView.Adapter<BusinessReviewsCardAdapt
 
             val time = sdf.format(timeD)
 
-            binding.businessReviewCardCreatedAt.text = "${time}"
+            binding.businessReviewCardCreatedAt.text = "$time"
             binding.businessReviewCardText.text = reviewResponse.text
         }
     }

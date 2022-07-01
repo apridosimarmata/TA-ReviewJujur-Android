@@ -3,6 +3,7 @@
     <string name="forgot_password"><u>Lupa kata sandi?</u></string>
     <string name="create_account"><u>Buat akun</u></string>
     <string name="have_an_account"><u>Masuk ke akun lain</u></string>
+    <string name="verify_whatsapp"><u>Verifikasi akun</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="see_more"><u>Lebih banyak</u></string>

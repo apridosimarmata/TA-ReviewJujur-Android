@@ -5,13 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.R
 import id.sireto.reviewjujur.databinding.FragmentReviewsBinding
 import id.sireto.reviewjujur.models.BaseResponse
+import id.sireto.reviewjujur.models.Meta
 import id.sireto.reviewjujur.models.ReviewResponse
+import id.sireto.reviewjujur.rv.adapters.ReviewCardAdapter
+import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
+import id.sireto.reviewjujur.utils.Auth
+import id.sireto.reviewjujur.utils.Converter
+import id.sireto.reviewjujur.utils.UI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
+import java.lang.Exception
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -25,6 +38,7 @@ class ReviewsFragment : Fragment() {
     private var response = BaseResponse()
     private var reviews = arrayListOf<ReviewResponse>()
     private lateinit var reviewsRecyclerView : RecyclerView
+    private lateinit var reviewsAdapter : ReviewCardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +53,65 @@ class ReviewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentReviewsBinding.inflate(layoutInflater)
+        retrofit = ApiClient.getApiClient()
+        apiService = retrofit.create(ApiService::class.java)
         setupUserReviewsRecyclerView()
+        setupListeners()
+        getUserReviews("0")
         return binding.root
     }
 
-    private fun setupUserReviewsRecyclerView(){
+    private fun setupListeners(){
+        binding.userReviewsLoadMoreReviewBtn.setOnClickListener{
+            try {
+                reviewsAdapter.reviews.last().createdAt.let {
+                    getUserReviews(it)
+                }
+            }catch (e : Exception){
 
+            }
+        }
+    }
+
+    private fun getUserReviews(createdAt : String){
+        val accessToken = Auth.getToken(requireContext())
+        var refreshToken = Auth.getRefreshToken(requireContext())
+        lifecycleScope.launch(Dispatchers.Main){
+            val getReviews = lifecycleScope.async {
+                accessToken?.let { token ->
+                    refreshToken?.let { refreshToken ->
+                        response = try {
+                            apiService.getUserReviews(token, refreshToken, createdAt).body()!!
+                        }catch (e: Exception){
+                            BaseResponse(Meta(code = 0, message = "Error : ${e.cause}"), null)
+                        }
+                    }
+                }
+            }
+
+            getReviews.await()
+
+            if (response.meta.code == 200){
+                reviews.clear()
+                (response.result as ArrayList<*>).map {
+                    reviews.add(Converter.anyToReviewResponse(it as LinkedTreeMap<String, Any>))
+                }
+                if(reviews.size == 0){
+                    UI.snackbarTop(binding.userReviews, "Tidak ada review")
+                }
+                reviewsAdapter.reviews.addAll(reviews)
+                reviewsAdapter.notifyDataSetChanged()
+            }else{
+                UI.showSnackbarByResponseCode(response.meta, binding.userReviews)
+            }
+        }
+    }
+
+    private fun setupUserReviewsRecyclerView(){
+        reviewsRecyclerView = binding.userReviews
+        reviewsAdapter = ReviewCardAdapter(apiService, lifecycleScope)
+        reviewsRecyclerView.adapter = reviewsAdapter
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        reviewsRecyclerView.layoutManager = layoutManager
     }
 }

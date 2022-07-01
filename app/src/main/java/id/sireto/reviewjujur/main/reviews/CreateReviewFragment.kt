@@ -4,12 +4,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -20,10 +18,7 @@ import id.sireto.reviewjujur.databinding.FragmentCreateReviewBinding
 import id.sireto.reviewjujur.models.*
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
-import id.sireto.reviewjujur.utils.Auth
-import id.sireto.reviewjujur.utils.Converter
-import id.sireto.reviewjujur.utils.Fingerprint
-import id.sireto.reviewjujur.utils.UI
+import id.sireto.reviewjujur.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -112,7 +107,7 @@ class CreateReviewFragment : Fragment() {
                 "-"
             }
             Glide.with(createReviewBusinessPhoto)
-                .load(business.photo)
+                .load(Constants.CDN + business.photo + ".png")
                 .centerCrop()
                 .into(createReviewBusinessPhoto)
         }
@@ -136,7 +131,7 @@ class CreateReviewFragment : Fragment() {
             Fingerprint.getLocationProviders(activity),
             Fingerprint.getWifiSleepingPolicy(contentResolver)
         )
-        val review =  ReviewPost(
+        val review =  ReviewRequest(
             binding.createReviewText.text.toString(),
             score,
             business.uid,

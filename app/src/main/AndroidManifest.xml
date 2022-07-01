@@ -11,15 +11,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ReviewJujur.NoActionBar">
+        android:theme="@style/Theme.ReviewJujur.NoActionBar"
+        android:fullBackupContent="">
+        <activity android:name=".authentication.NewPasswordActivity" />
+        <activity android:name=".main.SearchActivity" />
+        <activity android:name=".main.business.CreateBusinessActivity" />
         <activity
-            android:exported="true"
-            android:name=".main.reviews.CreateReviewActivity">
+            android:name=".main.reviews.CreateReviewActivity"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="app" android:host="id.sireto.reviewjujur"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="id.sireto.reviewjujur"
+                    android:scheme="app" />
             </intent-filter>
         </activity>
         <activity android:name=".main.scan.ScanActivity" />
@@ -27,9 +35,8 @@
         <activity android:name=".main.GroupedBusinessesActivity" />
         <activity android:name=".main.ChooseLocationActivity" />
         <activity android:name=".main.HomeActivity" />
-        <activity android:name=".authentication.NewPasswordActivity" />
         <activity android:name=".authentication.CodeVerificationActivity" />
-        <activity android:name=".authentication.ForgotPasswordActivity" />
+        <activity android:name=".authentication.RequestVerificationCodeActivity" />
         <activity android:name=".authentication.RegistrationActivity" />
         <activity android:name=".authentication.LoginActivity" />
         <activity android:name=".SplashActivity" />

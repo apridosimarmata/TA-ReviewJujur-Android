@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.CodeVerificationActivity">
+    tools:context=".main.SearchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/constraintLayout11"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@color/primary"
@@ -17,25 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView12"
-            style="@style/page_heading.medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Verifikasi Kode"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.cardview.widget.CardView
-            android:id="@+id/code_verification_back"
+            android:id="@+id/cardView4"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/ripple"
             app:cardBackgroundColor="@color/primary"
+            app:cardCornerRadius="60dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +38,9 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView20"
+                    android:id="@+id/imageView19"
                     android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,82 +48,63 @@
                     app:srcCompat="@drawable/ic_back" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/page_heading.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pencarian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/code_verification_code"
-        style="@style/form"
-        android:layout_width="220dp"
+        android:id="@+id/editTextTextPersonName2"
+        style="@style/search"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/et_shadow"
-        android:ems="6"
-        android:hint="******"
-        android:inputType="number"
-        android:textAlignment="center"
+        android:ems="10"
+        android:hint="Cari"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView14"
-        style="@style/form_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Kode Verifikasi"
-        app:layout_constraintBottom_toTopOf="@+id/code_verification_code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView15"
-        style="@style/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Masukkan kode yang dikirimkan\nke WhatsApp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/code_verification_code"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/verify_verify"
-        android:layout_width="100dp"
+        android:id="@+id/search_activity_back"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="100dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="@drawable/ripple"
         app:cardBackgroundColor="@color/primary"
         app:cardCornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/code_verification_code"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView17"
-                style="@style/button_text"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:text="Verifikasi"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_search_white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

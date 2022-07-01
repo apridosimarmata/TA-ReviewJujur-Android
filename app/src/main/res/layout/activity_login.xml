@@ -123,7 +123,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/login_forgotPassword"
+        android:id="@+id/login_forgot_password"
         style="@style/hyperlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -137,15 +137,29 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/login_CreateAccount"
+        android:id="@+id/login_create_account"
         style="@style/hyperlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/create_account"
-        app:layout_constraintBottom_toBottomOf="@+id/login_login"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/login_login"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/login_forgotPassword"
-        app:layout_constraintTop_toBottomOf="@+id/login_forgotPassword"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/login_forgot_password"
+        app:layout_constraintTop_toBottomOf="@+id/login_forgot_password"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/login_verify_account"
+        style="@style/hyperlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/verify_whatsapp"
+        app:layout_constraintBottom_toTopOf="@+id/login_create_account"
+        app:layout_constraintEnd_toEndOf="@+id/login_create_account"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/login_create_account"
+        app:layout_constraintTop_toBottomOf="@+id/login_forgot_password"
+        app:layout_constraintVertical_bias=".5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

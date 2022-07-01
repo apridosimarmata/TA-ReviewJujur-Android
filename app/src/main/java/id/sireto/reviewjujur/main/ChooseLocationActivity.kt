@@ -2,11 +2,9 @@ package id.sireto.reviewjujur.main
 
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.internal.LinkedTreeMap
@@ -24,7 +22,6 @@ import id.sireto.reviewjujur.utils.UI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import retrofit2.Retrofit
 import java.lang.Exception
 
@@ -54,7 +51,10 @@ class ChooseLocationActivity : AppCompatActivity() {
         }
         binding.chooseLocationSave.setOnClickListener {
             selectedLocationUid?.let {
-                SharedPref.saveToSharedPref(this, Constants.KEY_SELECTED_LOCATION, selectedLocationUid!!)
+                SharedPref.saveToStringSharedPref(
+                    Constants.KEY_SELECTED_LOCATION,
+                    selectedLocationUid!!
+                )
                 super.onBackPressed()
             }
         }

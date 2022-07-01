@@ -3,7 +3,7 @@ package id.sireto.reviewjujur.models
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 
-data class ReviewPost(
+data class ReviewRequest(
     @SerializedName("text")
     val text : String,
 

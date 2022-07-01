@@ -6,24 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.internal.LinkedTreeMap
 import id.sireto.reviewjujur.databinding.ActivityLoginBinding
 import id.sireto.reviewjujur.main.HomeActivity
 import id.sireto.reviewjujur.models.BaseResponse
 import id.sireto.reviewjujur.models.Meta
-import id.sireto.reviewjujur.models.UserEmailAuthenticationPost
+import id.sireto.reviewjujur.models.UserEmailAuthenticationRequest
 import id.sireto.reviewjujur.services.api.ApiClient
 import id.sireto.reviewjujur.services.api.ApiService
-import id.sireto.reviewjujur.utils.Auth
-import id.sireto.reviewjujur.utils.Constants
-import id.sireto.reviewjujur.utils.Converter
-import id.sireto.reviewjujur.utils.UI
+import id.sireto.reviewjujur.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import retrofit2.Retrofit
 import java.lang.Exception
 
@@ -36,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        SharedPref.removeAccessTokens()
         setContentView(binding.root)
         setupListeners()
         setupValidators()
@@ -47,7 +43,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginForgotPassword.setOnClickListener{
-            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+            startActivity(Intent(this, RequestVerificationCodeActivity::class.java).putExtra("type", Constants.FORGOT_PASSWORD))
+        }
+
+        binding.loginVerifyAccount.setOnClickListener{
+            startActivity(Intent(this, RequestVerificationCodeActivity::class.java).putExtra("type", Constants.VERIFY_ACCOUNT))
         }
 
         binding.loginLogin.setOnClickListener {
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(){
-        val user = UserEmailAuthenticationPost(
+        val user = UserEmailAuthenticationRequest(
             binding.loginEmail.text.toString(),
             binding.loginPassword.text.toString()
         )
@@ -86,17 +86,19 @@ class LoginActivity : AppCompatActivity() {
             login.await()
             progress.dismiss()
 
-            if (response.meta.code == 200){
-                response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
-                var authenticationResponse = Converter.anyToAthenticationResponse(response.result as LinkedTreeMap<String, Any>)
-                Log.d("login refresh", authenticationResponse.refreshToken)
-                Auth.saveTokenDetails(this@LoginActivity, authenticationResponse.token, authenticationResponse.refreshToken)
-                this@LoginActivity.finish()
-                startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-            }else{
-                UI.showSnackbarByResponseCode(response.meta, binding.loginEmail)
-            }
+            when(response.meta.code){
+                200 -> {
+                    response.meta.message?.let { UI.snackbar(binding.loginEmail, it) }
+                    var authenticationResponse = Converter.anyToAthenticationResponse(response.result as LinkedTreeMap<String, Any>)
+                    Auth.saveTokenDetails(this@LoginActivity, authenticationResponse.token, authenticationResponse.refreshToken)
+                    this@LoginActivity.finish()
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                }
+                403 -> {
 
+                }
+                else -> UI.showSnackbarByResponseCode(response.meta, binding.loginEmail)
+            }
         }
     }
 

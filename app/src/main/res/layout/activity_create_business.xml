@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.business.CreateBusinessActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout10"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="@color/primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/create_business_back"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple"
+                    app:cardBackgroundColor="@color/primary"
+                    app:cardCornerRadius="60dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/create_business_back_btn"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_back" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView34"
+                    style="@style/page_heading.medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buat Toko"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView43"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Foto"
+                app:layout_constraintBottom_toTopOf="@+id/create_business_photo"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_location_spinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_location_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_location_spinner"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Alamat"
+                app:layout_constraintBottom_toTopOf="@+id/create_business_address"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_address"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_address"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_name"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/create_business_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/ripple"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_location_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_location_spinner"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/et_shadow" />
+
+            <Spinner
+                android:id="@+id/create_business_location_spinner"
+                style="@style/form"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/et_shadow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_province_spinner"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/create_business_name"
+                style="@style/form"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/et_shadow"
+                android:ems="10"
+                android:hint="John's Cafe"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/create_business_address"
+                style="@style/form"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/et_shadow"
+                android:ems="10"
+                android:hint="Jl. Sisingamangaraja 21"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_name"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView41"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Provinsi"
+                app:layout_constraintBottom_toTopOf="@+id/create_business_province_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_province_spinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_province_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_address"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView42"
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Lokasi"
+                app:layout_constraintBottom_toTopOf="@+id/create_business_location_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_location_spinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_location_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_province_spinner"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Spinner
+                android:id="@+id/create_business_province_spinner"
+                style="@style/form"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/et_shadow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_address"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                style="@style/form_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Nama Toko"
+                app:layout_constraintBottom_toTopOf="@+id/create_business_name"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_name"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_name"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/create_business_create"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/ripple"
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/create_business_location_spinner"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/create_business_photo"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_photo"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView45"
+                        style="@style/button_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buat"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

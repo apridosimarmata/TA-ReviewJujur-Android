@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupSections(){
-        binding.homePager.isUserInputEnabled = true
+        binding.homePager.isUserInputEnabled = false
         binding.homePager.offscreenPageLimit = 3
         val tabLayout = binding.tabLayout
         val adapter = SectionAdapter(homeFragment, profileFragment, reviewsFragment, this)
