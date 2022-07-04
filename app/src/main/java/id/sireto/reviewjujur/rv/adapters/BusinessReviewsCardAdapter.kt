@@ -23,6 +23,7 @@ class BusinessReviewsCardAdapter : RecyclerView.Adapter<BusinessReviewsCardAdapt
 
             binding.businessReviewCardCreatedAt.text = "$time"
             binding.businessReviewCardText.text = reviewResponse.text
+            binding.businessReviewCardScore.text = reviewResponse.score.toString()
         }
     }
 

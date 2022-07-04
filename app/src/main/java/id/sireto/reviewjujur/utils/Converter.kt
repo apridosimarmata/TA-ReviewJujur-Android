@@ -17,7 +17,7 @@ object Converter {
     fun anyToLocationResponse(any: LinkedTreeMap<String, Any>) =
         LocationResponse(any["uid"].toString(), any["province_uid"].toString() ,any["name"].toString())
 
-    fun anyToBusinessResponse(any: LinkedTreeMap<String, Any>) =
+    fun anyToBusinessResponse(any: LinkedTreeMap<*, *>) =
         BusinessResponse(
             any["uid"].toString(),
             any["reviewsCount"].toString().split(".")[0].toInt(),

@@ -23,7 +23,7 @@ class BusinessMainCardAdapter(private val activity: Activity) : RecyclerView.Ada
             binding.restoMainRating.text = if (business.reviewsCount == 0){
                 "-"
             } else{
-                "${(business.totalScore/business.reviewsCount)} (${business.reviewsCount})"
+                "${(business.totalScore.toFloat()/business.reviewsCount.toFloat())} (${business.reviewsCount})"
             }
 
             Glide.with(binding.restoImage)

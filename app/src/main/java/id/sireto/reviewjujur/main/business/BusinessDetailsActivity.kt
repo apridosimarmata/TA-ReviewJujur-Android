@@ -1,10 +1,9 @@
 package id.sireto.reviewjujur.main.business
 
-import android.content.AbstractThreadedSyncAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -88,13 +87,14 @@ class BusinessDetailsActivity : AppCompatActivity() {
         reviewsRecyclerView.layoutManager = layoutManager
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupBusinessDetails(){
         binding.businessDetailsNameHead.text = business.name
         binding.businessDetailsName.text = business.name
         binding.businessDetailsAddress.text = business.address
         with(binding.businessDetailsRating){
             if(business.reviewsCount > 0){
-                this.text = "${business.reviewsCount/business.totalScore}"
+                this.text = "${(business.totalScore.toFloat()/business.reviewsCount.toFloat())} (${business.reviewsCount})"
             }else{
                 this.text = "-"
             }
@@ -102,7 +102,7 @@ class BusinessDetailsActivity : AppCompatActivity() {
 
         Glide.with(binding.businessDetailsPhoto)
             .load(Constants.CDN + business.photo + ".png")
-            .centerCrop()
+            .centerInside()
             .into(binding.businessDetailsPhoto)
     }
 

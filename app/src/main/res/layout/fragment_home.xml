@@ -27,8 +27,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/et_shadow"
                 android:ems="10"
+                android:focusable="false"
                 android:hint="Cari"
-                android:inputType="textPersonName"
+                android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -211,32 +212,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_bestScore"
                 app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/resto_main_card" />
-
-            <TextView
-                android:id="@+id/home_reviewed"
-                style="@style/heading.medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Pernah Direview"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/home_bestScore"
-                app:layout_constraintTop_toBottomOf="@id/rv_bestScore"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_reviewed"
-                android:layout_width="0dp"
-                android:layout_height="170dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_reviewed"
                 tools:listitem="@layout/resto_main_card" />
 
             <TextView

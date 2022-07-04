@@ -48,7 +48,7 @@ interface ApiService {
     suspend fun getLocationsByProvinceUid(@Path("provinceUid") provinceUid : String) : Response<BaseResponse>
 
     @GET("/businesses/search?")
-    suspend fun searchBusiness(@Query("limit") limit : Int?, @Query("page") page : Int?, @Query("locationUid") locationUid : String, @Query("search") businessName : String?, @Query("sort") sort : String?) : Response<BaseResponse>
+    suspend fun searchBusiness(@Query("limit") limit : Int?, @Query("page") page : Int?, @Query("locationUid") locationUid : String, @Query("query") businessName : String?, @Query("sort") sort : String?) : Response<BaseResponse>
 
     @GET("/businesses/{businessUid}")
     suspend fun getBusinessByUid(@Path("businessUid") businessUid : String) : Response<BaseResponse>

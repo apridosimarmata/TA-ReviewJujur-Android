@@ -83,11 +83,16 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireActivity(), ChooseLocationActivity::class.java))
         }
 
-        binding.homeFragmentSearch.onFocusChangeListener = (View.OnFocusChangeListener { p0, p1 ->
+        /*binding.homeFragmentSearch.onFocusChangeListener = (View.OnFocusChangeListener { p0, p1 ->
             if(p1){
                 startActivity(Intent(requireContext(), SearchActivity::class.java))
             }
-        })
+        })*/
+
+        binding.homeFragmentSearch.setOnClickListener{
+            startActivity(Intent(requireContext(), SearchActivity::class.java)
+                .putExtra("locationUid", SharedPref.getStringFromSharedPref(Constants.KEY_SELECTED_LOCATION)))
+        }
     }
 
     override fun onResume() {
@@ -154,12 +159,12 @@ class HomeFragment : Fragment() {
 
             getBestScoringBusinesses.await()
             if (response.meta.code == 200){
-                Converter.anyToBusinessPagination(response.result as LinkedTreeMap<String, Any>).let {
-                    it.rows.map {
+                Converter.anyToBusinessPagination(response.result as LinkedTreeMap<String, Any>).let { pagination ->
+                    pagination.rows.map {
                         bestScoringBusinesses.add(it)
                     }
-                    binding.homeLocationName.text = it.location + ","
-                    binding.homeProvinceName.text = it.province
+                    binding.homeLocationName.text = pagination.location + ","
+                    binding.homeProvinceName.text = pagination.province
                 }
                 showBestScoringBusinesses()
             }else{
@@ -263,10 +268,8 @@ class HomeFragment : Fragment() {
             homeProvinceName.visibility = invisible
             homeBestScore.visibility = invisible
             homeMostReview.visibility = invisible
-            homeReviewed.visibility = invisible
             rvBestScore.visibility = invisible
             rvMostReview.visibility = invisible
-            rvReviewed.visibility = invisible
             homeSeeMoreBestScore.visibility = invisible
             homeSeeMoreMostReview.visibility = invisible
         }
@@ -279,10 +282,8 @@ class HomeFragment : Fragment() {
             homeProvinceName.visibility = visible
             homeBestScore.visibility = visible
             homeMostReview.visibility = visible
-            homeReviewed.visibility = visible
             rvBestScore.visibility = visible
             rvMostReview.visibility = visible
-            rvReviewed.visibility = visible
             homeSeeMoreBestScore.visibility = visible
             homeSeeMoreMostReview.visibility = visible
         }

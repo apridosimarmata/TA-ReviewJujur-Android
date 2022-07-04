@@ -124,7 +124,7 @@ class NameFragment(private val apiService: ApiService) : Fragment() {
 
         binding.fragmentNameLogout.setOnClickListener{
             val builder = AlertDialog.Builder(requireContext())
-            builder.setMessage("Yakin ingi keluar?")
+            builder.setMessage("Yakin ingin keluar?")
                 .setCancelable(false)
                 .setPositiveButton("Ya") { _, _ ->
                     SharedPref.removeAccessTokens()

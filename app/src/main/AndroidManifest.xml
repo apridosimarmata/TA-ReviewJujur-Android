@@ -11,8 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ReviewJujur.NoActionBar"
-        android:fullBackupContent="">
+        android:theme="@style/Theme.ReviewJujur.NoActionBar">
         <activity android:name=".authentication.NewPasswordActivity" />
         <activity android:name=".main.SearchActivity" />
         <activity android:name=".main.business.CreateBusinessActivity" />
